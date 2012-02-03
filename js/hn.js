@@ -10,6 +10,10 @@ var HN = {
 			"backgroundColor" : "none !important",
 			"padding" : "23px"
 		});
+		$('.pagetop a').each(function(i){
+			var link = $(this).attr("href");
+			$(this).addClass(link);
+		});
 		$('.comment *').css({"color" : "#373736"});
 		$('td[bgcolor="#ff6600"]').css({"backgroundColor" : "none !important"});
 		$('img').each(function(){
@@ -40,6 +44,34 @@ var HN = {
 		HN.init_keys();
 	},
 	
+	submit_overlay: function(){
+		var html = "<div id='submit-overlay'></div>",
+		    bg   = "<div id='overlay-bg'></div>";
+		$('.pagetop').append(html + bg);
+		$('a.submit').click(function(e){
+			e.preventDefault();
+			$.ajax({
+			  url: "/submit",
+			  success: function(data){
+				$('#submit-overlay').html(data);
+				$('#overlay-bg').fadeIn(200, function(){
+					$('#submit-overlay').fadeIn(100);
+					$('input[name="t"]').focus();
+				});
+			    $('#overlay-bg').click(function(){
+					HN.close_overlay();
+				});
+			  }
+			});
+		});
+	},
+	
+	close_overlay: function(){
+		$('#submit-overlay').fadeOut(200, function(){
+			$('#overlay-bg').fadeOut(100);
+		});
+	},
+	
 	remove_pipes: function(){
 	    var html = $('.pagetop:first').html();
 		var i = 0;
@@ -64,11 +96,11 @@ var HN = {
 	},
 	
 	init_keys: function(){
-	    var j = 74; // Next Item
-	    var k = 75; // Previous Item
-	    var o = 79; // Open Story
-	    var p = 80; // View Comments
-	    var h = 72; // Open Help
+	    var j = 74, // Next Item
+	        k = 75, // Previous Item
+	        o = 79, // Open Story
+	        p = 80, // View Comments
+	        h = 72; // Open Help
 	    $(document).keydown(function(e){
 	        if (e.which == j) {
 	            HN.next_story();
@@ -127,11 +159,11 @@ var HN = {
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
 	    }
-	},
-	
-	open_help: function(){
-	    
 	}
 }
+
+$(document).ready(function(){
+	HN.submit_overlay();
+});
 
 HN.init();
