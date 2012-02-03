@@ -41,7 +41,6 @@ var HN = {
 		$("input[name='q']").val("Search");
 		
 		HN.remove_pipes();
-		HN.init_keys();
 	},
 	
 	submit_overlay: function(){
@@ -159,10 +158,22 @@ var HN = {
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
 	    }
+	},
+	
+	load_options: function(){
+	    chrome.extension.sendRequest({method: "get_options"}, function(response) {
+	      return response.status["shortcuts"]
+        });
 	}
 }
 
 $(document).ready(function(){
+    chrome.extension.sendRequest({method: "get_options"}, function(response) {
+      var resp = response.status["shortcuts"];
+      if (resp == 'true') {
+          HN.init_keys();
+      }
+    });
 	HN.submit_overlay();
 });
 

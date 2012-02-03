@@ -4,25 +4,41 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>HN+ Options</title>
-	<meta name="author" content="Jarques Pretorius">
 	<link rel="stylesheet" href="options.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/options.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    
-    <div class="slider on">
-      <div class="switch"></div>
-      <span class="text">on</span>
-    </div>  
-    <br>
-    <div class="slider off">
-      <div class="switch"></div>
-      <span class="text">off</span>
-    </div>
-    
+	
+	
+	<div id="content">
+		
+	<div id="header">
+		<img src="images/logo.png" width="36" height="36" alt="Logo"><p>Settings</p>
+	</div>
+	
+	<div class="option">
+		<span class="header">
+			<p>Keyboard Shortcuts</p>
+			<div id="slider_shortcuts" class="slider on">
+		      <div class="switch"></div>
+		      <span class="text">on</span>
+			  <input type="checkbox" id="shortcuts" checked="checked"/>
+		    </div>
+		</span>
+		<ul class="shortcuts-ul">
+			<li><strong>j</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select next story</li>
+			<li><strong>k</strong> &nbsp;&nbsp;&nbsp;&nbsp;select previous story</li>
+			<li><strong>o</strong> &nbsp;&nbsp;&nbsp;&nbsp;open link / story</li>
+			<li><strong>p</strong> &nbsp;&nbsp;&nbsp;&nbsp;view comments</li>
+		</ul>	
+	</div>
+	    
+	</div>
+	
     <script type="text/javascript">
         HNOptions.init();
+		HNSettings.load_options();
     </script>
     
 </body>
