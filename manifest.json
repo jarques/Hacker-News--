@@ -1,6 +1,6 @@
 {
     "name": "Hacker News +",
-    "version": "1.5",
+    "version": "1.6",
     "description": "Stylish Hacker News.",
 	"options_page": "options.html",
 	"permissions": ["tabs"],
