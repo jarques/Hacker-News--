@@ -194,17 +194,13 @@ var HNHeat = {
             score = score.replace(/[a-z]/g, '');
             
             if (score < NO_HEAT) {
-                //$(this).parent().parent().prev().find('.title a').css({"color" : "#242222"});
-                $(this).parent().parent().prev().find('.title a').addClass('no-heat');
+                $(this).parents('tr').prev().find('.title a').addClass('no-heat');
             } else if (score < MILD) {
-                //$(this).parent().parent().prev().find('.title a').css({"color" : "#462628"});
-                $(this).parent().parent().prev().find('.title a').addClass('mild');
+                $(this).parents('tr').prev().find('.title a').addClass('mild');
             } else if (score < MEDIUM) {
-                //$(this).parent().parent().prev().find('.title a').css({"color" : "#702e30"});
-                $(this).parent().parent().prev().find('.title a').addClass('medium');
+                $(this).parents('tr').prev().find('.title a').addClass('medium');
             } else {
-                //$(this).parent().parent().prev().find('.title a').css({"color" : "#d93b3d"});
-                $(this).parent().parent().prev().find('.title a').addClass('hot');
+                $(this).parents('tr').prev().find('.title a').addClass('hot');
             };
         });
     }
