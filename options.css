@@ -36,6 +36,7 @@ body {
 	margin-top: -10px;
 	padding-right: 5px;
 	position: absolute;
+	color: #000;
 }
 .option span .slider {
 	position: absolute;
@@ -49,6 +50,13 @@ body {
 }
 .option li {
 	padding: 6px 0;
+}
+.option p {
+    font-size: 11px;
+    color: #858988;
+}
+.option img {
+    margin: 20px 36px;
 }
 .shortcuts-ul strong {
 	color: #5d6160;

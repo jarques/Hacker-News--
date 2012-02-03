@@ -158,13 +158,8 @@ var HN = {
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
 	    }
-	},
-	
-	load_options: function(){
-	    chrome.extension.sendRequest({method: "get_options"}, function(response) {
-	      return response.status["shortcuts"]
-        });
 	}
+
 }
 
 $(document).ready(function(){
@@ -173,8 +168,45 @@ $(document).ready(function(){
       if (resp == 'true') {
           HN.init_keys();
       }
+      var heat = response.status["hnheat"];
+      if (heat == 'true') {
+          HNHeat.init();
+      }
     });
 	HN.submit_overlay();
 });
 
 HN.init();
+
+var HNHeat = {
+    
+    init: function(){
+        NO_HEAT = 50;
+        MILD    = 75;
+        MEDIUM  = 99;
+        
+        HNHeat.get_and_rate_stories();
+    },
+    
+    get_and_rate_stories: function(){
+        $('.score').each(function(i){
+            var score = $(this).html();
+            score = score.replace(/[a-z]/g, '');
+            
+            if (score < NO_HEAT) {
+                //$(this).parent().parent().prev().find('.title a').css({"color" : "#242222"});
+                $(this).parent().parent().prev().find('.title a').addClass('no-heat');
+            } else if (score < MILD) {
+                //$(this).parent().parent().prev().find('.title a').css({"color" : "#462628"});
+                $(this).parent().parent().prev().find('.title a').addClass('mild');
+            } else if (score < MEDIUM) {
+                //$(this).parent().parent().prev().find('.title a').css({"color" : "#702e30"});
+                $(this).parent().parent().prev().find('.title a').addClass('medium');
+            } else {
+                //$(this).parent().parent().prev().find('.title a').css({"color" : "#d93b3d"});
+                $(this).parent().parent().prev().find('.title a').addClass('hot');
+            };
+        });
+    }
+    
+}

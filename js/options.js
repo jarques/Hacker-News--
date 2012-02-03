@@ -39,8 +39,17 @@ var HNOptions = {
 
 var HNSettings = {
     
-    check_shortucts: function(){
+    check_shortcuts: function(){
         var value = localStorage["shortcuts"];
+        if (value == 'true') {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    
+    check_hnheat: function(){
+        var value = localStorage["hnheat"];
         if (value == 'true') {
             return true;
         } else {
@@ -55,12 +64,17 @@ var HNSettings = {
             else
               sendResponse({});
         });
-        // Shotcut
-        var value = localStorage["shortcuts"];
-        if (value == 'true') {
+        // Shotcuts
+        if (HNSettings.check_shortcuts()) {
             HNOptions.switch_on($('#slider_shortcuts.slider'));
         } else {
             HNOptions.switch_off($('#slider_shortcuts.slider'));
+        }
+        // HNHeat
+        if (HNSettings.check_hnheat()) {
+            HNOptions.switch_on($('#hnheat.slider'));
+        } else {
+            HNOptions.switch_off($('#hnheat.slider'));
         }
     }
 

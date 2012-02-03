@@ -35,11 +35,11 @@ table tr {position: relative;}
 	font-weight: medium;
 }
 a:link {
-	color: #202020 !important;
+	color: #202020;
 	text-decoration: none;
 }
 a:hover {
-	color: #dd4b39 !important;
+	color: #dd4b39;
 }
 input[type="submit"] {
 	font-family: "Helvetica Neue", Arial, sans-serif;
@@ -204,3 +204,9 @@ form[action="/r"] input[type="text"], form[action="/r"] textarea {
 	z-index: 99;
 	display: none;
 }
+
+/* HN Heat */
+.no-heat {color: #242222 !important;}
+.mild {color: #462628 !important;}
+.medium {color: #702e30 !important;}
+.hot {color: #d93b3d !important;}
