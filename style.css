@@ -15,6 +15,7 @@ body center table {
 	background: #fff;
 	width: 980px;
 	margin: 0 auto;
+    height: 86px;
 }
 body center table table {
 	box-shadow: none;
@@ -204,3 +205,4 @@ form[action="/r"] input[type="text"], form[action="/r"] textarea {
 	z-index: 99;
 	display: none;
 }
+
