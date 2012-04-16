@@ -11,4 +11,4 @@ You'll see a bunch of options open up, select "Load unpacked extension" and brow
 <h3>Disclaimer</h3>
 HN+ is pretty rough around the edges, and the code itself isn't very "neat" at all. But it does what I intended it to do, make Hacker News look a little different.
 
-http://jarqu.es/dev/HN+/
+http://dev.jarqu.es/HN+/
