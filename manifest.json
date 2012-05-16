@@ -1,6 +1,6 @@
 {
     "name": "Hacker News +",
-    "version": "1.5",
+    "version": "1.5.1",
     "description": "Stylish Hacker News.",
     "icons": {
         "16" : "images/icon-16.png",
@@ -15,6 +15,10 @@
             "http://news.ycombinator.com/*",
             "http://news.ycombinator.net/*",
             "http://hackerne.ws/*",
-            "http://news.ycombinator.org/*" ]
+            "http://news.ycombinator.org/*",
+            "https://news.ycombinator.com/*",
+            "https://news.ycombinator.net/*",
+            "https://hackerne.ws/*",
+            "https://news.ycombinator.org/*" ]
       }]
 }
