@@ -7,8 +7,7 @@
 var HN = {
 	init: function() {
 		$('td[bgcolor="#ff6600"]').css({
-			"backgroundColor" : "none !important",
-			"padding" : "23px"
+			"backgroundColor" : "none !important"
 		});
 		$('.pagetop a').each(function(i){
 			var link = $(this).attr("href");
