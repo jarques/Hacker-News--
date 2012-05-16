@@ -15,6 +15,10 @@
             "http://news.ycombinator.com/*",
             "http://news.ycombinator.net/*",
             "http://hackerne.ws/*",
-            "http://news.ycombinator.org/*" ]
+            "http://news.ycombinator.org/*",
+            "https://news.ycombinator.com/*",
+            "https://news.ycombinator.net/*",
+            "https://hackerne.ws/*",
+            "https://news.ycombinator.org/*" ]
       }]
 }
