@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Hacker News +",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "description": "Stylish Hacker News.",
     "icons": {
         "16" : "images/icon-16.png",
