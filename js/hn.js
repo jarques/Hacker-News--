@@ -39,8 +39,19 @@ var HN = {
 		});
 		$("input[name='q']").val("Search");
 		
+		HN.init_inputs();
+		
 		HN.remove_pipes();
 		HN.init_keys();
+	},
+	
+	init_inputs: function(){
+	    $("textarea, input").focus(function(){
+	        $(document).unbind("keydown");
+	    });
+	    $("textarea, input").blur(function(){
+		    HN.init_keys();
+	    });
 	},
 	
 	submit_overlay: function(){
@@ -100,7 +111,7 @@ var HN = {
 	        o = 79, // Open Story
 	        p = 80, // View Comments
 	        h = 72; // Open Help
-	    $(document).keydown(function(e){
+	    $(document).bind("keydown", function(e){
 	        if (e.which == j) {
 	            HN.next_story();
 	        } else if (e.which == k) {
