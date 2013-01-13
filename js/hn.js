@@ -83,9 +83,9 @@ var HN = {
 	},
 	
 	remove_pipes: function(){
-	    var html = $('.pagetop:first').html();
+		var html = $('.pagetop:first').html();
 		var i = 0;
-		while(i<=5) {
+		while(html && i<=5) {
 		    html = html.replace("|",' &nbsp;&nbsp; ');
 		    i++
 		}
