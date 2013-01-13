@@ -114,12 +114,13 @@ html body center table tbody tr:first-child td table a {
 .yclinks a {
 	color: #b8b8b8 !important;
 }
-.pagetop {
-    font-size: 10px;
-    color: #a3a3a3 !important;
+.pagetop, .pagetop a {
+    /* font-size: 10px; */
+    color: #b8b8b8 !important;
     font-family: "Helvetica Neue", Arial, sans-serif !important;
 }
 .pagetop b a {
+	display: none;
 	font-size: 11px;
 	color: #a3a3a3 !important;
 	text-transform: lowercase;
@@ -133,7 +134,7 @@ textarea {
 input[name="q"] {
     position: absolute;
     top: 34px;
-    left: 485px;
+    left: 450px;
     width: 270px;
     border-radius: 2px;
     color: #c1c6cb !important;
@@ -163,7 +164,7 @@ form textarea {background: #fff;border: 1px solid #c9c9c7;font-family: font-fami
 	background: #dd4b39;
 	color: #fff;
 }
-html body center table tbody tr td table tbody tr td a img[src="http://ycombinator.com/images/y18.gif"] {
+html body center table tbody tr td table tbody tr td a img[src="http://ycombinator.com/images/y18.gif"], html body center table tbody tr td table tbody tr td a img[src="/sslyc/images/y18.gif"] {
 	height: 0 !important;
 	width: 0 !important;
 	/* these numbers match the new image's dimensions */
