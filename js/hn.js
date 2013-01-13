@@ -92,7 +92,14 @@ var HN = {
 		    html = html.replace("|",' &nbsp;&nbsp; ');
 		    i++
 		}
-           $('.pagetop:first').html(html);
+    $('.pagetop:first').html(html);
+		var html = $('.pagetop:last').html();
+		var i = 0;
+		while(html && i<=1) {
+		    html = html.replace("|",' &nbsp;&nbsp; ');
+		    i++
+		}
+    $('.pagetop:last').html(html);
 	},
 	
 	set_input_default: function(el) {
