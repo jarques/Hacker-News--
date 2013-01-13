@@ -35,6 +35,7 @@ var HN = {
 		});
 		$('.yclinks').parent('center').css({"width" : "100%"});
 		$('img[src="http://ycombinator.com/images/y18.gif"]').parent().attr({"href": "http://news.ycombinator.com/"});
+		$('img[src="/sslyc/images/y18.gif"]').parent().attr({"href": "/"});
 		$('.title').each(function(){
 		    $(this).find('a').addClass("post_title");
 		});
