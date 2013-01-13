@@ -205,4 +205,12 @@ form[action="/r"] input[type="text"], form[action="/r"] textarea {
 	z-index: 99;
 	display: none;
 }
-
+/* Expired Link Page */
+.expired-link {
+	padding-top: 150px;
+	text-align: center;
+	width: 100%;
+	color: #a3a3a3 !important;
+	font-family: "Helvetica Neue", Arial, sans-serif !important;
+	font-size: 18px;
+}

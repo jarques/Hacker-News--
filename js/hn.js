@@ -43,6 +43,7 @@ var HN = {
 		
 		HN.remove_pipes();
 		HN.init_keys();
+		HN.check_for_expired_link();
 	},
 	
 	init_inputs: function(){
@@ -169,7 +170,13 @@ var HN = {
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
 	    }
-	}
+	},
+  
+  check_for_expired_link: function(){
+    if ($('body').text() == 'Unknown or expired link.') {
+      $('body').wrapInner('<div class="expired-link">');
+    }
+  }
 }
 
 $(document).ready(function(){
