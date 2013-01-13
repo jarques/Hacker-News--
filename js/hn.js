@@ -37,12 +37,13 @@ var HN = {
 		$('.title').each(function(){
 		    $(this).find('a').addClass("post_title");
 		});
-		$("input[name='q']").val("Search");
+		$("input[name='q']").attr('placeholder','Search');
 		
 		HN.init_inputs();
 		
 		HN.remove_pipes();
 		HN.init_keys();
+		HN.check_for_expired_link();
 	},
 	
 	init_inputs: function(){
@@ -83,9 +84,9 @@ var HN = {
 	},
 	
 	remove_pipes: function(){
-	    var html = $('.pagetop:first').html();
+		var html = $('.pagetop:first').html();
 		var i = 0;
-		while(i<=5) {
+		while(html && i<=5) {
 		    html = html.replace("|",' &nbsp;&nbsp; ');
 		    i++
 		}
@@ -169,7 +170,13 @@ var HN = {
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
 	    }
-	}
+	},
+  
+  check_for_expired_link: function(){
+    if ($('body').text() == 'Unknown or expired link.') {
+      $('body').wrapInner('<div class="expired-link">');
+    }
+  }
 }
 
 $(document).ready(function(){

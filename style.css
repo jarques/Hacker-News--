@@ -121,8 +121,8 @@ html body center table tbody tr:first-child td table a {
 }
 .pagetop b a {
 	font-size: 11px;
-	display: none;
-	color: #a3a3a3 !important
+	color: #a3a3a3 !important;
+	text-transform: lowercase;
 }
 textarea {
     border: 1px solid #c6cfd6 !important;
@@ -132,8 +132,8 @@ textarea {
 }
 input[name="q"] {
     position: absolute;
-    top: 30px;
-    left: 395px;
+    top: 34px;
+    left: 485px;
     width: 270px;
     border-radius: 2px;
     color: #c1c6cb !important;
@@ -205,4 +205,12 @@ form[action="/r"] input[type="text"], form[action="/r"] textarea {
 	z-index: 99;
 	display: none;
 }
-
+/* Expired Link Page */
+.expired-link {
+	padding-top: 150px;
+	text-align: center;
+	width: 100%;
+	color: #a3a3a3 !important;
+	font-family: "Helvetica Neue", Arial, sans-serif !important;
+	font-size: 18px;
+}
