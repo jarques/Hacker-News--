@@ -37,7 +37,7 @@ var HN = {
 		$('.title').each(function(){
 		    $(this).find('a').addClass("post_title");
 		});
-		$("input[name='q']").val("Search");
+		$("input[name='q']").attr('placeholder','Search');
 		
 		HN.init_inputs();
 		
