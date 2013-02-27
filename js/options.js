@@ -1,4 +1,4 @@
-// Saves options to localStorage.
+// Saves options to Chrome's local storage.
 function save_options() {
   var select = document.getElementById("keybindings");
   var choice = select.children[select.selectedIndex].value;
@@ -9,8 +9,6 @@ function save_options() {
 
 // Brings up the users prefence (if saved)
 function restore_options() {
-  choice = null;
-  // var choice = localStorage["keybindings"];
   var storageArea = chrome.storage.local;
   storageArea.get("keybindings", function(data) {
     if (!data.keybindings) {
