@@ -120,7 +120,8 @@ var HN = {
 	        k = 75, // Previous Item
 	        o = 79, // Open Story
 	        p = 80, // View Comments
-	        h = 72; // Open Help
+	        h = 72, // Open Help
+          a = 65; // Upvote
 	    $(document).bind("keydown", function(e){
 	        if (e.which == j) {
 	            HN.next_story();
@@ -132,7 +133,9 @@ var HN = {
 	            HN.view_comments();
 	        } else if (e.which == h) {
 	            HN.open_help();
-	        }
+	        } else if (e.which == a) {
+              HN.upvote();
+          }
 	    })
 	},
 	
@@ -180,6 +183,16 @@ var HN = {
    		    window.location = comments.attr("href");
 	    }
 	},
+
+  upvote: function(){
+      if ($('.on_story').length != 0) {
+          var story = $('.on_story');
+          var upvote_button = story.parent().prev().find('a:first');
+          if (upvote_button) {
+            upvote_button.click();
+          }
+      }
+  },
   
   check_for_expired_link: function(){
     if ($('body').text() == 'Unknown or expired link.') {
