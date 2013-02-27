@@ -146,11 +146,10 @@ var HN = {
 	},
 	
 	next: function() {
-			if (window.location.pathname == '/') {
-					HN.next_story();
-			}
 			if (window.location.pathname == '/item') {
 	    		HN.next_comment();		
+	  	} else {
+	  		HN.next_story();
 	  	}
 	},
 
@@ -178,11 +177,10 @@ var HN = {
 	},
 
 	previous: function() {
-			if (window.location.pathname == '/') {
-					HN.previous_story();
-			}
 			if (window.location.pathname == '/item') {
 	    		HN.previous_comment();		
+	  	} else {
+	  		HN.previous_story();
 	  	}
 	},
 	
