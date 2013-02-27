@@ -163,16 +163,7 @@ var HN = {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().next().next().next().find(".post_title")
 
-	        // jQuery find() returns a jQuery collection, make sure it isnt empty
-	        if (next_lem.length < 1) {
-	        	return;
-	        }
-	        next_lem.addClass("on_story");
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 10
-               }, 200);
-	        current.removeClass("on_story");
+	        HN.focus_next('story', current, next_lem);
 	    }
 	},
 
@@ -184,15 +175,7 @@ var HN = {
 	        var current = $('.on_comment');
 	        var next_lem = current.parent().parent().parent().parent().parent().next().find('.comment-container');
 
-	        if (next_lem.length < 1) {
-	        	return;
-	        }
-	        next_lem.addClass('on_comment');
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 40
-               }, 200);
-	        current.removeClass('on_comment');
+	        HN.focus_next('comment', current, next_lem);
 	    }
 	},
 
@@ -212,15 +195,7 @@ var HN = {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().prev().prev().prev().find(".post_title")
 
-	        if (next_lem.length < 1) {
-	        	return;
-	        }
-	        next_lem.addClass("on_story");
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 10
-               }, 200);
-	        current.removeClass("on_story");
+	        HN.focus_next('story', current, next_lem);
 	    }
 	},
 
@@ -231,16 +206,27 @@ var HN = {
 	        var current = $('.on_comment');
 	        var next_lem = current.parent().parent().parent().parent().parent().prev().find('.comment-container');
 	        
-	        if (next_lem.length < 1) {
-	        	return;
-	        }
-	        next_lem.addClass('on_comment');
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 40
-               }, 200);
-	        current.removeClass('on_comment');
+	        HN.focus_next('comment', current, next_lem);
 	    }
+	},
+
+	/**
+	 * [If next element is found, highlight it and then remove previous comment highlight]
+	 * @param  [string] type 		Specify if this is for comment or story headline
+	 * @param  current_elem			Currently focused element
+	 * @param  next_elem   			jQuery Collection or Single Result from jQuery find() method (should be single result, or empty collection)
+	 */
+	focus_next: function(type, current_elem, next_elem){
+			// if no next element was found in jQuery Collection, return null and leave original highlighted
+			if (next_elem.length < 1) {
+  	    	return;
+      }
+      next_elem.addClass('on_' + type);
+      $('html, body').stop();
+      $('html, body').animate({
+               scrollTop: next_elem.offset().top - 10
+           }, 200);
+      current_elem.removeClass('on_' + type);
 	},
 	
 	open_story: function(){
