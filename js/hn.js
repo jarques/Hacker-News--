@@ -139,8 +139,6 @@ var HN = {
 	            HN.open_story();
 	        } else if (e.which == p) {
 	            HN.view_comments();
-	        } else if (e.which == h) {
-	            HN.open_help();
 	        } else if (e.which == a) {
               HN.upvote();
           }
