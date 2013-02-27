@@ -162,6 +162,11 @@ var HN = {
 	    } else {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().next().next().next().find(".post_title")
+
+	        // jQuery find() returns a jQuery collection, make sure it isnt empty
+	        if (next_lem.length < 1) {
+	        	return;
+	        }
 	        next_lem.addClass("on_story");
 	        $('html, body').stop();
 	        $('html, body').animate({
@@ -178,6 +183,10 @@ var HN = {
 	    } else {
 	        var current = $('.on_comment');
 	        var next_lem = current.parent().parent().parent().parent().parent().next().find('.comment-container');
+
+	        if (next_lem.length < 1) {
+	        	return;
+	        }
 	        next_lem.addClass('on_comment');
 	        $('html, body').stop();
 	        $('html, body').animate({
@@ -202,6 +211,10 @@ var HN = {
 	    } else {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().prev().prev().prev().find(".post_title")
+
+	        if (next_lem.length < 1) {
+	        	return;
+	        }
 	        next_lem.addClass("on_story");
 	        $('html, body').stop();
 	        $('html, body').animate({
@@ -217,6 +230,10 @@ var HN = {
 	    } else {
 	        var current = $('.on_comment');
 	        var next_lem = current.parent().parent().parent().parent().parent().prev().find('.comment-container');
+	        
+	        if (next_lem.length < 1) {
+	        	return;
+	        }
 	        next_lem.addClass('on_comment');
 	        $('html, body').stop();
 	        $('html, body').animate({
