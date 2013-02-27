@@ -14,6 +14,9 @@ var HN = {
 			$(this).addClass(link);
 		});
 		$('.comment *').css({"color" : "#373736"});
+		$('.comment').each(function(){
+			$(this).parent().addClass('comment-container')
+		})
 		$('td[bgcolor="#ff6600"]').css({"backgroundColor" : "none !important"});
 		$('img').each(function(){
       var src = $(this).attr("src");
@@ -124,9 +127,9 @@ var HN = {
           a = 65; // Upvote
 	    $(document).bind("keydown", function(e){
 	        if (e.which == j) {
-	            HN.next_story();
+	            HN.next();
 	        } else if (e.which == k) {
-	            HN.previous_story();
+	            HN.previous();
 	        } else if (e.which == o) {
 	            HN.open_story();
 	        } else if (e.which == p) {
@@ -139,6 +142,15 @@ var HN = {
 	    })
 	},
 	
+	next: function() {
+			if (window.location.pathname == '/') {
+					HN.next_story();
+			}
+			if (window.location.pathname == '/item') {
+	    		HN.next_comment();		
+	  	}
+	},
+
 	next_story: function(){
 	    if ($('.on_story').length == 0) {
 	        $('.post_title:first').addClass("on_story");
@@ -153,6 +165,31 @@ var HN = {
 	        current.removeClass("on_story");
 	    }
 	},
+
+	next_comment: function(){
+	    if ($('.on_comment').length == 0) {
+	    		// Stick on_comment style to the comment-container, that way we can highlight & style the entire element
+	        $('.comment-container:first').addClass('on_comment');
+	    } else {
+	        var current = $('.on_comment');
+	        var next_lem = current.parent().parent().parent().parent().parent().next().find('.comment-container');
+	        next_lem.addClass('on_comment');
+	        $('html, body').stop();
+	        $('html, body').animate({
+                   scrollTop: next_lem.offset().top - 40
+               }, 200);
+	        current.removeClass('on_comment');
+	    }
+	},
+
+	previous: function() {
+			if (window.location.pathname == '/') {
+					HN.previous_story();
+			}
+			if (window.location.pathname == '/item') {
+	    		HN.previous_comment();		
+	  	}
+	},
 	
 	previous_story:function(){
 	    if ($('.on_story').length == 0) {
@@ -166,6 +203,21 @@ var HN = {
                    scrollTop: next_lem.offset().top - 10
                }, 200);
 	        current.removeClass("on_story");
+	    }
+	},
+
+	previous_comment: function(){
+	    if ($('.on_comment').length == 0) {
+	        
+	    } else {
+	        var current = $('.on_comment');
+	        var next_lem = current.parent().parent().parent().parent().parent().prev().find('.comment-container');
+	        next_lem.addClass('on_comment');
+	        $('html, body').stop();
+	        $('html, body').animate({
+                   scrollTop: next_lem.offset().top - 40
+               }, 200);
+	        current.removeClass('on_comment');
 	    }
 	},
 	
