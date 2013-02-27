@@ -44,10 +44,15 @@ var HN = {
 		});
 		$("input[name='q']").attr('placeholder','Search');
 		
-		HN.init_inputs();
-		
+		HN.init_inputs();		
 		HN.remove_pipes();
-		HN.init_keys();
+		// Only init keys if user has keybindings turned on, or has not yet chosen
+	  var storageArea = chrome.storage.local;
+		storageArea.get('keybindings', function(data) {
+	    if (typeof(data.keybindings) == 'undefined' || data.keybindings == 'true') {
+	      HN.init_keys();
+	    }
+	  });
 		HN.check_for_expired_link();
 	},
 	
