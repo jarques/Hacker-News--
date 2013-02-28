@@ -25,5 +25,8 @@
     "options_page": "options.html",
     "permissions": [
         "storage"
-    ]
+    ],
+    "background": {
+        "scripts": ["js/background.js"]
+    }
 }
