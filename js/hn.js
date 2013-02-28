@@ -129,7 +129,8 @@ var HN = {
 	        o = 79, // Open Story
 	        p = 80, // View Comments
 	        h = 72, // Open Help
-          a = 65; // Upvote
+          a = 65, // Upvote
+          l = 76; // Open Story and Comments in new tab
 	    $(document).bind("keydown", function(e){
 	        if (e.which == j) {
 	            HN.next();
@@ -141,6 +142,8 @@ var HN = {
 	            HN.view_comments();
 	        } else if (e.which == a) {
               HN.upvote();
+          } else if (e.which == l) {
+          		HN.open_story_and_comments();
           }
 	    })
 	},
@@ -149,7 +152,7 @@ var HN = {
 			if (window.location.pathname == '/item') {
 	    		HN.next_comment();		
 	  	} else {
-	  		HN.next_story();
+	  			HN.next_story();
 	  	}
 	},
 
@@ -180,7 +183,7 @@ var HN = {
 			if (window.location.pathname == '/item') {
 	    		HN.previous_comment();		
 	  	} else {
-	  		HN.previous_story();
+	  			HN.previous_story();
 	  	}
 	},
 	
@@ -207,10 +210,10 @@ var HN = {
 	},
 
 	/**
-	 * [If next element is found, highlight it and then remove previous comment highlight]
-	 * @param  [string] type 		Specify if this is for comment or story headline
-	 * @param  current_elem			Currently focused element
-	 * @param  next_elem   			jQuery Collection or Single Result from jQuery find() method (should be single result, or empty collection)
+	 * If next element is found, highlight it and then remove previous comment highlight
+	 * @param  string type 		Specify if this is for comment or story headline
+	 * @param  current_elem		Currently focused element
+	 * @param  next_elem   		jQuery Collection or Single Result from jQuery find() method (should be single result, or empty collection)
 	 */
 	focus_next: function(type, current_elem, next_elem){
 			// if no next element was found in jQuery Collection, return null and leave original highlighted
@@ -237,6 +240,31 @@ var HN = {
 	        var story = $('.on_story');
    		    var comments = story.parent().parent().next().find('.subtext').find('a:last');
    		    window.location = comments.attr("href");
+	    }
+	},
+
+	open_story_and_comments: function(){
+	    if ($('.on_story').length != 0) {
+	    		var story = $('.on_story');
+		  		chrome.extension.sendMessage({
+		  			open_url_in_tab: {
+		  				url: story.attr('href'), 
+		  				location: window.location.origin
+		  			}
+		  		});
+   		    
+   		    // Open comments if they exist
+   		    var comment = story.parent().parent().next().find('.subtext').find('a:last');
+   		    if (comment.length >= 1 && typeof(comment) != 'undefined' && typeof(comment.attr('href')) != 'undefined') {
+	   		    	chrome.extension.sendMessage({
+				  			open_url_in_tab: {
+				  				url: comment.attr('href'), 
+				  				location: window.location.origin
+				  			}
+				  		});
+   		    }
+
+   		    return false;
 	    }
 	},
 
