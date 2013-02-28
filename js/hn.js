@@ -256,12 +256,15 @@ var HN = {
    		    // Open comments if they exist
    		    var comment = story.parent().parent().next().find('.subtext').find('a:last');
    		    if (comment.length >= 1 && typeof(comment) != 'undefined' && typeof(comment.attr('href')) != 'undefined') {
-	   		    	chrome.extension.sendMessage({
-				  			open_url_in_tab: {
-				  				url: comment.attr('href'), 
-				  				location: window.location.origin
-				  			}
-				  		});
+   		    		// Only open comments link if it's a different url than the story (in case of site submissions)
+   		    		if (comment.attr('href') != story.attr('href')) {
+			   		    	chrome.extension.sendMessage({
+						  			open_url_in_tab: {
+						  				url: comment.attr('href'), 
+						  				location: window.location.origin
+						  			}
+						  		});
+			   		  }
    		    }
 
    		    return false;
