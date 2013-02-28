@@ -71,6 +71,7 @@ var HN = {
 		$('.pagetop').append(html + bg);
 		$('a.submit').click(function(e){
 			e.preventDefault();
+      $(document).unbind("keydown");
 			$.ajax({
 			  url: "/submit",
 			  success: function(data){
@@ -91,6 +92,7 @@ var HN = {
 		$('#submit-overlay').fadeOut(200, function(){
 			$('#overlay-bg').fadeOut(100);
 		});
+		HN.init_keys();
 	},
 	
 	remove_pipes: function(){
