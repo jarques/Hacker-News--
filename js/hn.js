@@ -14,6 +14,9 @@ var HN = {
 			$(this).addClass(link);
 		});
 		$('.comment *').css({"color" : "#373736"});
+		$('.comment').each(function(){
+			$(this).parent().addClass('comment-container')
+		});
 		$('td[bgcolor="#ff6600"]').css({"backgroundColor" : "none !important"});
 		$('img').each(function(){
       var src = $(this).attr("src");
@@ -41,10 +44,15 @@ var HN = {
 		});
 		$("input[name='q']").attr('placeholder','Search');
 		
-		HN.init_inputs();
-		
+		HN.init_inputs();		
 		HN.remove_pipes();
-		HN.init_keys();
+		// Only init keys if user has keybindings turned on, or has not yet chosen
+	  var storageArea = chrome.storage.local;
+		storageArea.get('keybindings', function(data) {
+	    if (typeof(data.keybindings) == 'undefined' || data.keybindings == 'true') {
+	      HN.init_keys();
+	    }
+	  });
 		HN.check_for_expired_link();
 	},
 	
@@ -63,6 +71,7 @@ var HN = {
 		$('.pagetop').append(html + bg);
 		$('a.submit').click(function(e){
 			e.preventDefault();
+      $(document).unbind("keydown");
 			$.ajax({
 			  url: "/submit",
 			  success: function(data){
@@ -83,6 +92,7 @@ var HN = {
 		$('#submit-overlay').fadeOut(200, function(){
 			$('#overlay-bg').fadeOut(100);
 		});
+		HN.init_keys();
 	},
 	
 	remove_pipes: function(){
@@ -120,35 +130,63 @@ var HN = {
 	        k = 75, // Previous Item
 	        o = 79, // Open Story
 	        p = 80, // View Comments
-	        h = 72; // Open Help
+	        h = 72, // Open Help
+          a = 65, // Upvote
+          l = 76; // Open Story and Comments in new tab
 	    $(document).bind("keydown", function(e){
 	        if (e.which == j) {
-	            HN.next_story();
+	            HN.next();
 	        } else if (e.which == k) {
-	            HN.previous_story();
+	            HN.previous();
 	        } else if (e.which == o) {
 	            HN.open_story();
 	        } else if (e.which == p) {
 	            HN.view_comments();
-	        } else if (e.which == h) {
-	            HN.open_help();
-	        }
+	        } else if (e.which == a) {
+              HN.upvote();
+          } else if (e.which == l) {
+          		HN.open_story_and_comments();
+          }
 	    })
 	},
 	
+	next: function() {
+			if (window.location.pathname == '/item') {
+	    		HN.next_comment();		
+	  	} else {
+	  			HN.next_story();
+	  	}
+	},
+
 	next_story: function(){
 	    if ($('.on_story').length == 0) {
 	        $('.post_title:first').addClass("on_story");
 	    } else {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().next().next().next().find(".post_title")
-	        next_lem.addClass("on_story");
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 10
-               }, 200);
-	        current.removeClass("on_story");
+
+	        HN.focus_next('story', current, next_lem);
 	    }
+	},
+
+	next_comment: function(){
+	    if ($('.on_comment').length == 0) {
+	    		// Stick on_comment style to the comment-container, that way we can highlight & style the entire element
+	        $('.comment-container:first').addClass('on_comment');
+	    } else {
+	        var current = $('.on_comment');
+	        var next_lem = current.parent().parent().parent().parent().parent().next().find('.comment-container');
+
+	        HN.focus_next('comment', current, next_lem);
+	    }
+	},
+
+	previous: function() {
+			if (window.location.pathname == '/item') {
+	    		HN.previous_comment();		
+	  	} else {
+	  			HN.previous_story();
+	  	}
 	},
 	
 	previous_story:function(){
@@ -157,13 +195,39 @@ var HN = {
 	    } else {
 	        var current = $('.on_story');
 	        var next_lem = current.parent().parent().prev().prev().prev().find(".post_title")
-	        next_lem.addClass("on_story");
-	        $('html, body').stop();
-	        $('html, body').animate({
-                   scrollTop: next_lem.offset().top - 10
-               }, 200);
-	        current.removeClass("on_story");
+
+	        HN.focus_next('story', current, next_lem);
 	    }
+	},
+
+	previous_comment: function(){
+	    if ($('.on_comment').length == 0) {
+	        
+	    } else {
+	        var current = $('.on_comment');
+	        var next_lem = current.parent().parent().parent().parent().parent().prev().find('.comment-container');
+	        
+	        HN.focus_next('comment', current, next_lem);
+	    }
+	},
+
+	/**
+	 * If next element is found, highlight/focus on it, and remove previous comment highlight
+	 * @param  string type 		Specify if this is for comment or story headline
+	 * @param  current_elem		Currently focused element
+	 * @param  next_elem   		jQuery Collection or Single Result from jQuery find() method (should be single result, or empty collection)
+	 */
+	focus_next: function(type, current_elem, next_elem){
+			// If no next element was found in jQuery Collection, return null and leave original highlighted
+			if (next_elem.length < 1) {
+  	    	return;
+      }
+      next_elem.addClass('on_' + type);
+      $('html, body').stop();
+      $('html, body').animate({
+               scrollTop: next_elem.offset().top - 10
+           }, 200);
+      current_elem.removeClass('on_' + type);
 	},
 	
 	open_story: function(){
@@ -180,6 +244,58 @@ var HN = {
    		    window.location = comments.attr("href");
 	    }
 	},
+
+	/**
+	 * Attempts to open the currently selected story (and comments discussion page)
+	 * In two new background tabs
+	 */
+	open_story_and_comments: function(){
+	    if ($('.on_story').length != 0) {
+	    		var story = $('.on_story');
+	    		// Send message to the background page to open this story in a new tab
+		  		chrome.extension.sendMessage({
+		  			open_url_in_tab: {
+		  				url: story.attr('href'), 
+		  				location: window.location.origin
+		  			}
+		  		});
+   		    
+   		    // Open comments if they exist
+   		    var comment = story.parent().parent().next().find('.subtext').find('a:last');
+   		    if (comment.length >= 1 && typeof(comment) != 'undefined' && typeof(comment.attr('href')) != 'undefined') {
+   		    		// Only open comments link if it's a different url than the story (in case of site submissions)
+   		    		if (comment.attr('href') != story.attr('href')) {
+			   		    	chrome.extension.sendMessage({
+						  			open_url_in_tab: {
+						  				url: comment.attr('href'), 
+						  				location: window.location.origin
+						  			}
+						  		});
+			   		  }
+   		    }
+
+   		    return false;
+	    }
+	},
+
+	/**
+	 * Upvotes a story or comment (if selected)
+	 */
+  upvote: function(){
+      if ($('.on_story').length != 0) {
+          var story = $('.on_story');
+          var upvote_button = story.parent().prev().find('a:first');
+          if (upvote_button) {
+            upvote_button.click();
+          }
+      } else if ($('.on_comment').length != 0) {
+      		var current = $('.on_comment');
+        	var upvote_button = current.prev().find('a:first');
+        	if (upvote_button) {
+            upvote_button.click();
+          }
+      }
+  },
   
   check_for_expired_link: function(){
     if ($('body').text() == 'Unknown or expired link.') {
