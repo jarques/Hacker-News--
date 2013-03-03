@@ -16,7 +16,7 @@ var HN = {
 		$('.comment *').css({"color" : "#373736"});
 		$('.comment').each(function(){
 			$(this).parent().addClass('comment-container')
-		})
+		});
 		$('td[bgcolor="#ff6600"]').css({"backgroundColor" : "none !important"});
 		$('img').each(function(){
       var src = $(this).attr("src");
@@ -212,13 +212,13 @@ var HN = {
 	},
 
 	/**
-	 * If next element is found, highlight it and then remove previous comment highlight
+	 * If next element is found, highlight/focus on it, and remove previous comment highlight
 	 * @param  string type 		Specify if this is for comment or story headline
 	 * @param  current_elem		Currently focused element
 	 * @param  next_elem   		jQuery Collection or Single Result from jQuery find() method (should be single result, or empty collection)
 	 */
 	focus_next: function(type, current_elem, next_elem){
-			// if no next element was found in jQuery Collection, return null and leave original highlighted
+			// If no next element was found in jQuery Collection, return null and leave original highlighted
 			if (next_elem.length < 1) {
   	    	return;
       }
@@ -245,9 +245,14 @@ var HN = {
 	    }
 	},
 
+	/**
+	 * Attempts to open the currently selected story (and comments discussion page)
+	 * In two new background tabs
+	 */
 	open_story_and_comments: function(){
 	    if ($('.on_story').length != 0) {
 	    		var story = $('.on_story');
+	    		// Send message to the background page to open this story in a new tab
 		  		chrome.extension.sendMessage({
 		  			open_url_in_tab: {
 		  				url: story.attr('href'), 
@@ -273,11 +278,20 @@ var HN = {
 	    }
 	},
 
+	/**
+	 * Upvotes a story or comment (if selected)
+	 */
   upvote: function(){
       if ($('.on_story').length != 0) {
           var story = $('.on_story');
           var upvote_button = story.parent().prev().find('a:first');
           if (upvote_button) {
+            upvote_button.click();
+          }
+      } else if ($('.on_comment').length != 0) {
+      		var current = $('.on_comment');
+        	var upvote_button = current.prev().find('a:first');
+        	if (upvote_button) {
             upvote_button.click();
           }
       }
