@@ -34,8 +34,9 @@ var HN = {
 			$(this).parent('center').parent().css({"width" : "20px"});
 		});
 		$('.yclinks').parent('center').css({"width" : "100%"});
-		$('img[src="http://ycombinator.com/images/y18.gif"]').parent().attr({"href": "http://news.ycombinator.com/"});
-		$('img[src="/sslyc/images/y18.gif"]').parent().attr({"href": "/"});
+		$('img[src="y18.gif"]').parent().attr({"href": "http://news.ycombinator.com/"});
+		$('img[src="y18.gif"]').parent().attr({"href": "/"});
+		$('img[src="y18.gif"]').attr({"src": "http://jarqu.es/images/hn-logo.png", "width" : "30", "height" : "30"});
 		$('.title').each(function(){
 		    $(this).find('a').addClass("post_title");
 		});
