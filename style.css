@@ -15,7 +15,7 @@ body center table {
 	background: #fff;
 	width: 980px;
 	margin: 0 auto;
-    height: 86px;
+  height: 86px;
 }
 body center table table {
 	box-shadow: none;
@@ -70,6 +70,14 @@ input[type="text"] {
 }
 .title a.on_story {
     border-left: 2px solid #3986f8 !important;
+}
+td.comment-container {
+  padding-left: 8px;
+  border-left: 2px solid #fff;
+}
+td.on_comment {
+  background-color: #F5F8FC !important;
+  border-left: 2px solid #DEE9FA;
 }
 .title a:visited {opacity: .5;}
 .subtext {
@@ -129,7 +137,7 @@ textarea {
     border: 1px solid #c6cfd6 !important;
     padding: 4px !important;
     font-family: "Helvetica Neue", Arial, sans-serif !important;
-	font-size: 12px !important;
+	  font-size: 12px !important;
 }
 input[name="q"] {
     position: absolute;

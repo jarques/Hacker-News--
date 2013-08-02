@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Options | Hacker News +</title>
+  <style>
+    body {
+      background: #f1f5f6;
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    #content {
+      background: #fff;
+      border-radius: 3px;
+      margin: 20px auto;
+      width: 360px;
+      padding: 20px;
+      box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+    }
+    #content h1 {
+      font-size: 14px;
+      margin: 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e0e6e9;
+    }
+    #content p {
+      font-size: 12px;
+    }
+    .button {
+      font-size: 13px;
+      color: white;
+      background: -webkit-gradient(linear,left top,left bottom,from(#4D90FE),to(#4787ED));
+      border: 1px solid #4079D6;
+      padding: 5px 10px;
+      text-transform: capitalize;
+      border-radius: 2px;
+    }
+    #status {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="content">
+    <h1>HN+ Options</h1>
+
+    <div class="option">
+      <p>Use Keybindings:
+
+      <select id="keybindings">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+      </p>
+    </div>
+
+    <div style="text-align: right">
+      <button id="save" class="button">Save</button>
+    </div>
+  </div>
+
+  <div id="status"></div>
+
+  <script src="js/options.js"></script>
+
+</body>
+</html>
