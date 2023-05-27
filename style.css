@@ -62,6 +62,9 @@ td[bgcolor="#ff6600"] img {
 	height: 22px;
 	border-radius: 4px;
 }
+.pagetop {
+	color: var(--text-color) !important;
+}
 .pagetop .hnname {
 	padding-right: 20px;
 	color: var(--text-color);
@@ -109,7 +112,8 @@ td[bgcolor="#ff6600"] img {
 	font-family: 'Poppins', sans-serif !important;
 	color: var(--text-color) !important;
 }
-.commtext a[rel="nofollow"] {
+.commtext a[rel="nofollow"],
+.profileform tr a {
 	color: #FF6600 !important;
 }
 textarea {
@@ -118,17 +122,29 @@ textarea {
 	box-sizing: border-box;
 	width: 520px;
 	height: 55px;
-	left: 281px;
-	top: 207px;
 
 	background: var(--input-bg);
 	border: 1px solid var(--input-border);
 	color: var(--input-text);
 	border-radius: 6px;
 }
-textarea:focus {
+textarea:focus, 
+input[type="text"],
+input[type="url"] {
 	border: 1px solid #FF6600;
 	outline: none;
+}
+input[type="text"],
+input[type="url"],
+select {
+	font-size: 14px !important;
+	padding: 12px;
+	box-sizing: border-box;
+
+	background: var(--input-bg);
+	border: 1px solid var(--input-border);
+	color: var(--input-text);
+	border-radius: 6px;
 }
 input[type="submit"] {
 	box-sizing: border-box;
@@ -155,9 +171,6 @@ input[type="submit"]:hover {
 }
 .reply a {
 	color: var(--text-color) !important;
-}
-.comment-tree {
-	/* background: var(--com-bg) */
 }
 
 /* Switcher */
