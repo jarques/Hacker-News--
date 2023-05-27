@@ -9,12 +9,15 @@
     "content_scripts": [ {
         "all_frames": true,
         "css": [ "style.css" ],
+        "js": ["js/hn.js"],
         "matches": [
-            "http://news.ycombinator.com/*",
             "https://news.ycombinator.com/*" ]
     }],
     "web_accessible_resources": [{ 
         "resources": ["/fonts/*.ttf"],
         "matches": ["https://news.ycombinator.com/*"]
-    }]
+    }],
+    "permissions": [
+        "storage"
+    ]
 }

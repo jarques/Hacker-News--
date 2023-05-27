@@ -5,19 +5,35 @@
 *
 */
 /* Vars */
-:root {
+:root, :root.light {
 	--light-grey: #737373;
 	--white: #FFF;
 	--bg-color: #FFF;
 	--border-color: #DADADA;
 	--text-color: #000;
+
+	/* Input */
+	--input-bg: #FAFAFA;
+	--input-border: #DDDDDD;
+	--input-text: #000000;
+
+	/* Comments */
+	--com-bg: #F9F9F9;
 }
-[data-theme="dark"] {
+:root.dark  {
 	--light-grey: #A5A5A5;
 	--white: #FFF;
 	--text-color: #E7E7E7;
 	--bg-color: #161C23;
-	--border-color: #DADADA;
+	--border-color: #2B3643;
+
+	/* Input */
+	--input-bg: #2B3542;
+	--input-border: #3A4756;
+	--input-text: #D1D1D1;
+
+	/* Comments */
+	--com-bg: #1E262F;
 }
 @font-face {
 	font-family: 'Poppins';
@@ -81,11 +97,17 @@ td[bgcolor="#ff6600"] img {
 }
 
 /* Comments */
-.comment {
+.toptext {
 	font-size: 14px !important;
 	line-height: 24px !important;
 	font-family: 'Poppins', sans-serif !important;
-	color: var(--text-color);
+	color: var(--text-color) !important;
+}
+.comment, .commtext {
+	font-size: 14px !important;
+	line-height: 24px !important;
+	font-family: 'Poppins', sans-serif !important;
+	color: var(--text-color) !important;
 }
 .commtext a[rel="nofollow"] {
 	color: #FF6600 !important;
@@ -99,8 +121,9 @@ textarea {
 	left: 281px;
 	top: 207px;
 
-	background: #FAFAFA;
-	border: 1px solid #DDDDDD;
+	background: var(--input-bg);
+	border: 1px solid var(--input-border);
+	color: var(--input-text);
 	border-radius: 6px;
 }
 textarea:focus {
@@ -114,8 +137,9 @@ input[type="submit"] {
 	left: 281px;
 	top: 279px;
 
-	background: var(--white);
-	border: 1px solid #DADADA;
+	background: var(--input-bg);
+	border: 1px solid var(--input-border);
+	color: var(--input-text);
 	box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.02), inset 0px -2px 0px rgba(0, 0, 0, 0.03);
 	border-radius: 6px;
 }
@@ -129,3 +153,71 @@ input[type="submit"]:hover {
 	display: block;
 	border-top: 1px dotted var(--border-color);
 }
+.reply a {
+	color: var(--text-color) !important;
+}
+.comment-tree {
+	/* background: var(--com-bg) */
+}
+
+/* Switcher */
+/* The switch - the box around the slider */
+.switch {
+	display: block;
+	--width-of-switch: 3.5em;
+	--height-of-switch: 2em;
+	/* size of sliding icon -- sun and moon */
+	--size-of-icon: 1.4em;
+	/* it is like a inline-padding of switch */
+	--slider-offset: 0.3em;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: var(--width-of-switch);
+	height: var(--height-of-switch);
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #f4f4f5;
+	transition: .4s;
+	border-radius: 30px;
+  }
+  
+  .slider:before {
+	position: absolute;
+	content: "";
+	height: var(--size-of-icon,1.4em);
+	width: var(--size-of-icon,1.4em);
+	border-radius: 20px;
+	left: var(--slider-offset,0.3em);
+	top: 50%;
+	transform: translateY(-50%);
+	background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+	;
+   transition: .4s;
+  }
+  
+  input:checked + .slider {
+	background-color: #303136;
+  }
+  
+  input:checked + .slider:before {
+	left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+	background: #303136;
+	/* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+	box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+  }
