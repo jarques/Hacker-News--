@@ -3,9 +3,6 @@
     "name" : "Hacker News +",
     "version" : "2.0",
     "description": "Stylish Hacker News.",
-    "host_permissions": [
-        "https://news.ycombinator.com/*"
-    ],
     "content_scripts": [ {
         "all_frames": true,
         "css": [ "style.css" ],
